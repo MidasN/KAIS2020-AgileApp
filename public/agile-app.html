@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Agile App Project</title>
+    <link rel="stylesheet" href="agile-app-style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<div id="main">
+    <header id="header">
+        <!--   the below creates an undefined error because it is trying to instantiate before the data has arrived     -->
+        <!--   maybe do something where this is loaded on created()     -->
+        <h1>{{store.content[0].value}}</h1>
+    </header>
+
+    <task-section title="To do" state="todo"></task-section>
+    <task-section title="Doing" state="doing"></task-section>
+    <task-section title="Done" state="done"></task-section>
+
+    <section id="team-members">
+        <article class="member" v-for="teamMember in store.teamMembers">
+            <img class="member-icon" :src='"./icons/"+teamMember.imgSrc' />
+            <div class="member-name">{{teamMember.name}}</div>
+            <div class="member-number-of-tasks" contenteditable="false">{{getMemberTasks(teamMember._id).length}}</div>
+        </article>
+        <i id="add-member-btn" class="fa fa-plus-circle" v-on:click='addTeamMember()'></i>
+    </section>
+
+</div>
+<script  type="text/javascript" src="agile-app-script.js"></script>
+
+</body>
+</html>
